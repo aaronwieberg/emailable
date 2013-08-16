@@ -32,21 +32,15 @@ module Emailable
     end
 
 
-    [:to, :cc, :bcc].each do |method_sym|
-      class_eval <<-EVAL
+    def method_missing(method_sym, *args)
+      addresses = case args.first
+        when Proc then args.first.call(record)
+        when String then args.first
+        when Symbol then record.send(args.first)
+        else nil
+      end
 
-        def #{method_sym}(recipients)
-          addresses = case recipients
-            when Proc then recipients.call(record)
-            when String then recipients
-            when Symbol then record.send(recipients)
-            else nil
-          end
-
-          self.list.merge!({ #{method_sym}: addresses })
-        end
-
-      EVAL
+      self.list.merge!({ method_sym => addresses })
     end
   end
 end
