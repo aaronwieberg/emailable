@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Emailable
   class MailingList
     attr_reader :definition
@@ -24,7 +22,7 @@ module Emailable
       @definition = definition
       @record = record
 
-      @list = OpenStruct.new      
+      @list = {}
     end
 
 
@@ -39,12 +37,13 @@ module Emailable
 
         def #{method_sym}(recipients)
           addresses = case recipients
-            when Symbol then record.send(recipients)
             when Proc then recipients.call(record)
+            when String then recipients
+            when Symbol then record.send(recipients)
             else nil
           end
 
-          self.list.send("#{method_sym}=", addresses)
+          self.list.merge!({ #{method_sym}: addresses })
         end
 
       EVAL
