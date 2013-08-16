@@ -1,0 +1,5 @@
+require File.join(File.dirname(__FILE__), 'emailable', 'version')
+require File.join(File.dirname(__FILE__), 'emailable', 'errors')
+require File.join(File.dirname(__FILE__), 'emailable', 'base')
+require File.join(File.dirname(__FILE__), 'emailable', 'mailing_list')
+require File.join(File.dirname(__FILE__), 'emailable', 'emailable')
