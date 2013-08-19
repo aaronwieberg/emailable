@@ -13,6 +13,10 @@ class Project
     mailing_list :admins do
       bcc ->(project) { project.admins }
     end
+
+    mailing_list :everyone do
+      to [:principal_contact, :secondary_contact, :admins]
+    end
   end
 
 

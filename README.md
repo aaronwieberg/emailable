@@ -21,6 +21,7 @@ class Project
 
     mailing_list :admins do
       to ->(project) { Administrator.all.collect(&:email) }
+      cc [:contact, :investigators]
       bcc MAILBOX
     end
   end
@@ -48,7 +49,7 @@ project.mailing_list # => { to: "contact@example.org", cc: ["a@example.org", "b@
 
 Administrator.all.collect(&:email) # => ["a@example.org"]
 MAILBOX # => "m@example.org"
-project.mailing_list(:admins) # => { to: ["a@example.org"], bcc: "m@example.org" }
+project.mailing_list(:admins) # => { to: ["a@example.org"], cc: ["contact@example.org", "a@example.org", "b@example.org"], bcc: "m@example.org" }
 ```
 
 ### Combined With ActionMailer
