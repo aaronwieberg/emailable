@@ -6,6 +6,12 @@ module Emailable
 
 
   module ClassMethods
+    def inherited(klass)
+      klass.instance_variable_set(:@mailing_lists, self.mailing_lists)
+      super
+    end
+
+
     def emailable(&block)
       @mailing_lists ||= Emailable::Base.new.tap{ |m| m.instance_eval(&block) }
     end

@@ -37,4 +37,16 @@ describe Emailable do
   it "returns all mailing list recipients as a Hash" do
     project.mailing_list(:admins).should be_an_instance_of(Hash)
   end
+
+
+  describe "an subclass inherits the parent's mailing lists" do
+    before do
+      class Subproject < Project; end;
+    end
+
+    it "has each of the parent's mailing lists" do
+      Subproject.new.mailing_list(:default).should be_an_instance_of(Hash)
+      Subproject.new.mailing_list(:admins).should be_an_instance_of(Hash)
+    end
+  end
 end
