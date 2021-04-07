@@ -1,5 +1,7 @@
-require File.join(File.dirname(__FILE__), 'emailable', 'version')
-require File.join(File.dirname(__FILE__), 'emailable', 'errors')
-require File.join(File.dirname(__FILE__), 'emailable', 'base')
-require File.join(File.dirname(__FILE__), 'emailable', 'mailing_list')
-require File.join(File.dirname(__FILE__), 'emailable', 'emailable')
+# frozen_string_literal: true
+
+require 'emailable/version'
+require 'emailable/errors'
+require 'emailable/base'
+require 'emailable/mailing_list'
+require 'emailable/emailable'
